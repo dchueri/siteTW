@@ -15,38 +15,47 @@ var cl = new criaUnidade('Cavalaria Leve', 2.66666)
 var ac = new criaUnidade('Arqueiro a Cavalo', 1.66666)
 var cp = new criaUnidade('Cavalaria Pesada', 1.66666)
 var tropas = [lanceiro, espadachim, barbaro, arqueiro, cl, ac, cp]
-var nTropas = 0
-var coletasLiberadas = 3
-var tropa = arqueiro
+var coletasLiberadas = 4
+var saqueTotal = 0
+
+
+function executa() {
+    console.clear()
+    iniciaColeta()
+    imprimeColetas()
+}
 
 function criaUnidade(nome, capacidade) {
     this.nome = nome
     this.capacidade = capacidade
     this.quantidade = 0
+    this.saque = 0
+    this.totalPequena = 0
+    this.totalMedia = 0
+    this.totalGrande = 0
+    this.totalExtrema = 0
 }
 
 /* ------------------------------------------------ */
 /* --------------- Tipos de coletas --------------- */
 
 function coletaPequena(tropa, q) {
-    let saqueTotal = tropa.capacidade * q
-    return console.log('Coleta Pequena \n' + tropa.quantidade + tropa.nome + '\nSaque: ' + Math.round(saqueTotal))
+    tropa.saque = tropa.capacidade * q
+    return Math.round(tropa.saque)
 }
 
 function coletaMedia(tropa, q) {
-    let saqueTotal = tropa.capacidade * 2.5 * q
-    return console.log('Coleta Média \n' + tropa.quantidade + tropa.nome + '\nSaque: ' + Math.round(saqueTotal))
+    tropa.saque = tropa.capacidade * 2.5 * q
+    return Math.round(tropa.saque)
 }
 
 function coletaGrande(tropa, q) {
-    let saqueTotal = tropa.capacidade * 5 * q
-    return console.log('Coleta Grande \n' + tropa.quantidade + tropa.nome + '\nSaque: ' + Math.round(saqueTotal))
-}
+    tropa.saque = tropa.capacidade * 5 * q
+    return Math.round(tropa.saque)}
 
 function coletaExtrema(tropa, q) {
-    let saqueTotal = tropa.capacidade * 7.5 * q
-    return console.log('Coleta Extrema \n' + tropa.quantidade + tropa.nome + '\nSaque: ' + Math.round(saqueTotal))
-}
+    tropa.saque = tropa.capacidade * 7.5 * q
+    return Math.round(tropa.saque)}
 
 /* ------------------------------------------------ */
 /* --------------- Divisor de tropas -------------- */
@@ -55,47 +64,83 @@ function iniciaColeta () {
 
     for (i=0; i < tropas.length; i++) {
         if (coletasLiberadas === 1) {
-            coletaPequena(tropa, nTropas)
-            break
+            coletaPequena(tropas[i], tropas[i].quantidade)
+            saqueTotal += tropas[i].saque
         } else if (coletasLiberadas === 2) {
-            let quantidadePequena = nTropas * 0.714286
-            let quantidadeMedia = nTropas * 0.285714
-            coletaPequena(tropa, quantidadePequena)
-            coletaMedia(tropa, quantidadeMedia)
-            break
+            tropas[i].totalPequena = tropas[i].quantidade * 0.714286
+            tropas[i].totalMedia = tropas[i].quantidade * 0.285714
+            coletaPequena(tropas[i], tropas[i].totalPequena)
+            coletaMedia(tropas[i], tropas[i].totalMedia)
+            saqueTotal += tropas[i].saque
         } else if (coletasLiberadas === 3) {
-            let quantidadePequena = nTropas * 0.625
-            let quantidadeMedia = nTropas * 0.25
-            let quantidadeGrande = nTropas * 0.125
-            coletaPequena(tropa, quantidadePequena)
-            coletaMedia(tropa, quantidadeMedia)
-            coletaGrande(tropa, quantidadeGrande)
-            break
+            tropas[i].totalPequena = tropas[i].quantidade * 0.625
+            tropas[i].totalMedia = tropas[i].quantidade * 0.25
+            tropas[i].totalGrande = tropas[i].quantidade * 0.125
+            coletaPequena(tropas[i], tropas[i].totalPequena)
+            coletaMedia(tropas[i], tropas[i].totalMedia)
+            coletaGrande(tropas[i], tropas[i].totalGrande)
+            saqueTotal += tropas[i].saque
         } else if (coletasLiberadas === 4) {
-            let quantidadePequena = nTropas * 0.576923
-            let quantidadeMedia = nTropas * 0.230769
-            let quantidadeGrande = nTropas * 0.115385
-            let quantidadeExtrema = nTropas * 0.076923
-            coletaPequena(tropa, quantidadePequena)
-            coletaMedia(tropa, quantidadeMedia)
-            coletaGrande(tropa, quantidadeGrande)
-            coletaExtrema(tropa, quantidadeExtrema)
-            break
+            tropas[i].totalPequena = tropas[i].quantidade * 0.576923
+            tropas[i].totalMedia = tropas[i].quantidade * 0.230769
+            tropas[i].totalGrande = tropas[i].quantidade * 0.115385
+            tropas[i].totalExtrema = tropas[i].quantidade * 0.076923
+            coletaPequena(tropas[i], tropas[i].totalPequena)
+            coletaMedia(tropas[i],tropas[i].totalMedia)
+            coletaGrande(tropas[i], tropas[i].totalGrande)
+            coletaExtrema(tropas[i], tropas[i].totalExtrema)
+            saqueTotal += tropas[i].saque
         }
     }
 }
 
 /* ------------------------------------------------ */
-/* -------------- Escolha suas tropas ------------- */
+/* ----- Escolha a quantidade de cada tropa ------ */
+console.clear()
 for (i=0; i < tropas.length; i++) {
     tropas[i].quantidade = readline.questionInt('Digite o numero de ' + tropas[i].nome + `\n`)
-    nTropas += tropas[i].quantidade
+    console.clear()
 }
 
-//nTropas = lanceiro.quantidade + espadachim.quantidade + barbaro.quantidade + arqueiro.quantidade + cl.quantidade + ac.quantidade + cp.quantidade
-console.log(nTropas)
+function imprimeColetas () {
+    console.clear()
+    console.log ('*** PEQUENA COLETA ***')
+    for (i = 0; i < tropas.length; i++) {
+            if (tropas[i].quantidade != 0) {
+            console.log(Math.round(tropas[i].totalPequena) + ' ' + tropas[i].nome)
+        }
+    }
+    console.log ('**********************')
 
-//console.log(coletaPequena(ac, nTropas))
-//console.log(coletaMedia(barbaro, nTropas))
-iniciaColeta()
+    if (coletasLiberadas > 1) {
+        console.log ('*** MÉDIA COLETA ***')
+        for (i = 0; i < tropas.length; i++) {
+                if (tropas[i].quantidade != 0) {
+                console.log(Math.round(tropas[i].totalMedia) + ' ' + tropas[i].nome)
+            }
+        }
+        console.log ('*********************')
+    }
+    
+    if (coletasLiberadas > 2) {
+        console.log ('*** GRANDE COLETA ***')
+        for (i = 0; i < tropas.length; i++) {
+                if (tropas[i].quantidade != 0) {
+                console.log(Math.round(tropas[i].totalGrande) + ' ' + tropas[i].nome)
+            }
+        }
+        console.log ('**********************')
+    } 
+    
+    if (coletasLiberadas > 3) {
+        console.log ('*** EXTREMA COLETA ***')
+        for (i = 0; i < tropas.length; i++) {
+                if (tropas[i].quantidade != 0) {
+                console.log(Math.round(tropas[i].totalExtrema) + ' ' + tropas[i].nome)
+            }
+        }
+        console.log ('**********************')
+    }
+}
 
+executa()
