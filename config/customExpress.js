@@ -6,7 +6,7 @@ module.exports = () => {
     const app = express()
 
     app.use(bodyParser.urlencoded({extended: true}))
-pp.use(bodyParser.json())
+    app.use(bodyParser.json())
 
     consign()
         .include('controllers')
