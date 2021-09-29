@@ -2,9 +2,40 @@ html {
     background-color: rgb(201 185 151)
 }
 
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#send {
+    border-radius: 1em;
+    border: 0;
+    background-color: rgb(224 224 224 / 70%);
+    padding: .5em .9em;
+    vertical-align: middle;
+    margin-left: 1.5em;
+}
+
+#send:hover {
+    background-color: white;
+    font-size: 0.9em;
+    transition: 0.6s;
+}
+
+#send:active {
+    background-color: rgb(224 224 224 / 70%);
+}
+
+caption {
+    font-weight: 800;
+}
+
 form {
     text-align: center;
     padding: 10em 0em 10em;
+}
+
+main {
+    text-align:center
 }
 
 .input { 
@@ -29,7 +60,7 @@ input[type=number] {
 .coletas {
     width: 100%;
     padding: 1%;
-    display: block;
+    display: inline-block;
     text-align: center;
     width: max-content ;
     height: max-content;
@@ -39,6 +70,7 @@ input[type=number] {
     border-radius: 10px;
     background-color: rgb(216 177 88 / 27%);
     box-shadow: 10px 10px 10px 0 #0000009e;
+    white-space: nowrap;
 }
 
 .input-tropas {

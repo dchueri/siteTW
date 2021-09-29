@@ -1,73 +1,66 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
+<title>Coletas TW</title>
 <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <script src="script.js" defer></script>
+<script src="style.js" defer></script>
 
 <body>
     <form method="POST">
         <div class="input-tropas">
             
-            <label for="quantidadeDeLanceiro">
+            <label for="quantidadeDelanceiro">
                 <img src="imagens/lanceiro.png">
             </label>
-            <input class="input" type="number" id="quantidadeDeLanceiro" value="0">
+            <input class="input" type="number" id="quantidadeDelanceiro" value="0">
         </div>
         <div class="input-tropas">
-            <label for="quantidadeDeEspadachim">
+            <label for="quantidadeDeespadachim">
                 <img src="imagens/espadachim.png">
             </label>
-            <input class="input" type="number" id="quantidadeDeEspadachim" value="0">
+            <input class="input" type="number" id="quantidadeDeespadachim" value="0">
         </div>
         <div class="input-tropas">
-            <label for="quantidadeDeBarbaro">
+            <label for="quantidadeDebarbaro">
                 <img src="imagens/barbaro.png">
             </label>
-            <input class="input" type="number" id="quantidadeDeBarbaro" value="0">
+            <input class="input" type="number" id="quantidadeDebarbaro" value="0">
         </div>
         <div class="input-tropas">
-            <label for="quantidadeDeArqueiro">
+            <label for="quantidadeDearqueiro">
                 <img src="imagens/arqueiro.png">
             </label>
-            <input class="input" type="number" id="quantidadeDeArqueiro" value="0">
+            <input class="input" type="number" id="quantidadeDearqueiro" value="0">
         </div>
         <div class="input-tropas">
-            <label for="quantidadeDeCavalariaLeve">
-                <img src="imagens/cl.png">
+            <label for="quantidadeDecavalariaLeve">
+                <img src="imagens/cavalariaLeve.png">
             </label>
-            <input class="input" type="number" id="quantidadeDeCavalariaLeve" value="0">
+            <input class="input" type="number" id="quantidadeDecavalariaLeve" value="0">
         </div>
         <div class="input-tropas">
-            <label for="quantidadeDeArqueiroACavalo">
-                <img src="imagens/ac.png">
+            <label for="quantidadeDearqueiroACavalo">
+                <img src="imagens/arqueiroACavalo.png">
             </label>
-            <input class="input" type="number" id="quantidadeDeArqueiroACavalo" value="0">
+            <input class="input" type="number" id="quantidadeDearqueiroACavalo" value="0">
         </div>
         <div class="input-tropas">
-            <label for="quantidadeDeCavalariaPesada">
-                <img src="imagens/cp.png">
+            <label for="quantidadeDecavalariaPesada">
+                <img src="imagens/cavalariaPesada.png">
             </label>
-            <input class="input" type="number" id="quantidadeDeCavalariaPesada" value="0">
+            <input class="input" type="number" id="quantidadeDecavalariaPesada" value="0">
         </div>
 
-        <script>
-            const input = document.querySelectorAll('input'); // get the input element
-            for (i = 0; i < input.length; i++) {
-                input[i].addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
-                resizeInput.call(input[i]); // immediately call the function
-
-                function resizeInput() {
-                    this.style.width = this.value.length + "ch";
-                }
-            }
-        </script>
-
-        <input type="submit" id="send" value="Enviar" onclick="executa()">
+        <input type="submit" id="send" value="Calcular" onclick="executa()">
 
     </form>
 
     <main>
-        <table class="coletas">
+        <table class="coletas" id="tabela-pequena">
             <tr>
                 <td>
                     <caption>Pequena Coleta</caption>
@@ -75,57 +68,30 @@
             </tr>
             <tr>
                 <td>
-                    <img class="imagem-tropas" src="imagens/lanceiro.png">
+                    <img class="imagem-recursos" src="imagens/madeira.png">
                 </td>
                 <td>
-                    <p class="resultado-lanceiro">0</p>
-                </td>
-            <tr>
-                <td>
-                    <img class="imagem-tropas" src="imagens/espadachim.png">
+                    <p class="recursos"> 0 </p>
                 </td>
                 <td>
-                    <p class="resultado-espadachim">0</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img class="imagem-tropas" src="imagens/barbaro.png">
+                    <img class="imagem-recursos" src="imagens/argila.png">
                 </td>
                 <td>
-                    <p class="resultado-barbaro">0</p>
+                    <p class="recursos"> 0 </p>
+                </td>
+                <td>
+                    <img class="imagem-recursos" src="imagens/ferro.png">
+                </td>
+                <td>
+                    <p class="recursos"> 0 </p>
                 </td>
             </tr>
+        </table>
+
+        <table class="coletas" id="tabela-media">
             <tr>
                 <td>
-                    <img class="imagem-tropas" src="imagens/arqueiro.png">
-                </td>
-                <td>
-                    <p class="resultado-arqueiro">0</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img class="imagem-tropas" src="imagens/cl.png">
-                </td>
-                <td>
-                    <p class="resultado-cl">0</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img class="imagem-tropas" src="imagens/ac.png">
-                </td>
-                <td>
-                    <p class="resultado-ac">0</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img class="imagem-tropas" src="imagens/cp.png">
-                </td>
-                <td>
-                    <p class="resultado-cp">0</p>
+                    <caption>Média Coleta</caption>
                 </td>
             </tr>
             <tr>
@@ -148,75 +114,62 @@
                     <p class="recursos"> 0 </p>
                 </td>
             </tr>
-            <!--  <li>
-                    <h2>Média Coleta</h2>
-                    <img class="imagem-tropas" src="imagens/lanceiro.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/espadachim.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/barbaro.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/arqueiro.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/cl.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/ac.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/cp.png">
-                    <p class="tropas">0</p>
+        </table>
+
+        <table class="coletas" id="tabela-grande">
+            <tr>
+                <td>
+                    <caption>Grande Coleta</caption>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <img class="imagem-recursos" src="imagens/madeira.png">
+                </td>
+                <td>
                     <p class="recursos"> 0 </p>
+                </td>
+                <td>
                     <img class="imagem-recursos" src="imagens/argila.png">
+                </td>
+                <td>
                     <p class="recursos"> 0 </p>
+                </td>
+                <td>
                     <img class="imagem-recursos" src="imagens/ferro.png">
+                </td>
+                <td>
                     <p class="recursos"> 0 </p>
-                </li>
-                <li>
-                    <h2>Grande Coleta</h2>
-                    <img class="imagem-tropas" src="imagens/lanceiro.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/espadachim.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/barbaro.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/arqueiro.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/cl.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/ac.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/cp.png">
-                    <p class="tropas">0</p>
+                </td>
+            </tr>
+        </table>
+
+        <table class="coletas" id="tabela-extrema">
+            <tr>
+                <td>
+                    <caption>Extrema Coleta</caption>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <img class="imagem-recursos" src="imagens/madeira.png">
+                </td>
+                <td>
                     <p class="recursos"> 0 </p>
+                </td>
+                <td>
                     <img class="imagem-recursos" src="imagens/argila.png">
+                </td>
+                <td>
                     <p class="recursos"> 0 </p>
+                </td>
+                <td>
                     <img class="imagem-recursos" src="imagens/ferro.png">
+                </td>
+                <td>
                     <p class="recursos"> 0 </p>
-                </li>
-                <li>
-                    <h2>Extrema Coleta</h2>
-                    <img class="imagem-tropas" src="imagens/lanceiro.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/espadachim.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/barbaro.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/arqueiro.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/cl.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/ac.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-tropas" src="imagens/cp.png">
-                    <p class="tropas">0</p>
-                    <img class="imagem-recursos" src="imagens/madeira.png">
-                    <p class="recursos"> 0 </p>
-                    <img class="imagem-recursos" src="imagens/argila.png">
-                    <p class="recursos"> 0 </p>
-                    <img class="imagem-recursos" src="imagens/ferro.png">
-                    <p class="recursos"> 0 </p>
-                </li> -->
+                </td>
+            </tr>
         </table>
     </main>
 </body>
