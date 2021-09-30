@@ -38,7 +38,7 @@ function inserirTropaNaTabela () {
             let campoResultadoPequena = document.createElement("td")
             
             let colocaImagemPequena = document.createElement("img")
-            colocaImagemPequena.src = `imagens/${tropas[i].nome}.png`
+            colocaImagemPequena.src = `./site/imagens/${tropas[i].nome}.png`
             let colocaResultadoPequena = document.createTextNode(Math.round(tropas[i].totalPequena))
             campoImagemPequena.appendChild(colocaImagemPequena)
             campoResultadoPequena.appendChild(colocaResultadoPequena)
@@ -51,7 +51,7 @@ function inserirTropaNaTabela () {
             let campoResultadoMedia = document.createElement("td")
 
             let colocaImagemMedia = document.createElement("img")
-            colocaImagemMedia.src = `imagens/${tropas[i].nome}.png`
+            colocaImagemMedia.src = `./site/imagens/${tropas[i].nome}.png`
             let colocaResultadoMedia = document.createTextNode(Math.round(tropas[i].totalMedia))
             campoImagemMedia.appendChild(colocaImagemMedia)
             campoResultadoMedia.appendChild(colocaResultadoMedia)
@@ -64,7 +64,7 @@ function inserirTropaNaTabela () {
             let campoResultadoGrande = document.createElement("td")
 
             let colocaImagemGrande = document.createElement("img")
-            colocaImagemGrande.src = `imagens/${tropas[i].nome}.png`
+            colocaImagemGrande.src = `./site/imagens/${tropas[i].nome}.png`
             let colocaResultadoGrande = document.createTextNode(Math.round(tropas[i].totalGrande))
             campoImagemGrande.appendChild(colocaImagemGrande)
             campoResultadoGrande.appendChild(colocaResultadoGrande)
@@ -77,7 +77,7 @@ function inserirTropaNaTabela () {
             let campoResultadoExtrema = document.createElement("td")
 
             let colocaImagemExtrema = document.createElement("img")
-            colocaImagemExtrema.src = `imagens/${tropas[i].nome}.png`
+            colocaImagemExtrema.src = `./site/imagens/${tropas[i].nome}.png`
             let colocaResultadoExtrema = document.createTextNode(Math.round(tropas[i].totalExtrema))
             campoImagemExtrema.appendChild(colocaImagemExtrema)
             campoResultadoExtrema.appendChild(colocaResultadoExtrema)
