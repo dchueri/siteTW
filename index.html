@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
 <title>Coletas TW</title>
+<link rel="shortcut icon" href="./site/imagens/favicon.png">
 <link rel="stylesheet" href="./site/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 <script src="./site/script.js" defer></script>
 <script src="./site/style.js" defer></script>
+
+<head>
+    <h1>Calculadora de Coletas TW</h1>
+</head>
 
 <body>
     <form method="POST">
@@ -58,6 +64,16 @@
         <input type="submit" id="send" value="Calcular" onclick="executa()">
 
     </form>
+
+    <div class="coletas-liberadas">
+        <h2>Selecione a MAIOR coleta que você possui liberada:</h2>
+        <select class="selecao-de-coletas">
+        <option value="1">Pequena Coleta</option>
+        <option value="2">Média Coleta</option>
+        <option value="3">Grande Coleta</option>
+        <option value="4">Extrema Coleta</option>
+        </select>
+    </div>
 
     <main>
         <table class="coletas" id="tabela-pequena">

@@ -15,7 +15,7 @@ var cl = new criaUnidade('cavalariaLeve', 2.66666)
 var ac = new criaUnidade('arqueiroACavalo', 1.66666)
 var cp = new criaUnidade('cavalariaPesada', 1.66666)
 var tropas = [lanceiro, espadachim, barbaro, arqueiro, cl, ac, cp]
-var coletasLiberadas = 4
+var coletasLiberadas = 1
 var saqueTotal = 0
 var resultado = []
 var resultadoRecursos = []
@@ -24,11 +24,116 @@ let corpoTabelaMedia = document.querySelector('table[id="tabela-media"]')
 let corpoTabelaGrande = document.querySelector('table[id="tabela-grande"]')
 let corpoTabelaExtrema = document.querySelector('table[id="tabela-extrema"]')
 let arrayTabelas = ["tabela-pequena", "tabela-media", "tabela-grande", "tabela-extrema"]
-
 const btn = document.querySelector('#send')
 
+btn.addEventListener('click', (e) => {
+    e.preventDefault()
+    
+    for (i = 0; i < tropas.length; i++) {
+        tropas[i].quantidade = parseInt(document.getElementById(`quantidadeDe${tropas[i].nome}`).value)
+    }
+    
+    reniciaTabela()
+    selecionaColetas()
+    cssTabela()
+    executa()
+    insereTropasHTML()
+})
 
-function inserirTropaNaTabela () {
+function criaUnidade(nome, capacidade) {
+    this.nome = nome
+    this.capacidade = capacidade
+    this.quantidade = 0
+    this.saque = 0
+    this.totalPequena = 0
+    this.totalMedia = 0
+    this.totalGrande = 0
+    this.totalExtrema = 0
+}
+
+function coletaPequena(tropa, q) {
+    tropa.saque = tropa.capacidade * q
+    return Math.round(tropa.saque)
+}
+
+function coletaMedia(tropa, q) {
+    tropa.saque = tropa.capacidade * 2.5 * q
+    return Math.round(tropa.saque)
+}
+
+function coletaGrande(tropa, q) {
+    tropa.saque = tropa.capacidade * 5 * q
+    return Math.round(tropa.saque)}
+
+function coletaExtrema(tropa, q) {
+    tropa.saque = tropa.capacidade * 7.5 * q
+    return Math.round(tropa.saque)}
+
+function executa() {
+    saqueTotal = 0
+    iniciaColeta()
+    insereRecursosHTML()
+}
+
+function selecionaColetas() {
+    const coletaSelecionada = document.querySelector("select")
+
+    return coletasLiberadas = parseInt(coletaSelecionada.value)
+}
+
+function iniciaColeta() {
+
+    for (i=0; i < tropas.length; i++) {
+        if (coletasLiberadas === 1) {
+            tropas[i].totalPequena = tropas[i].quantidade
+            coletaPequena(tropas[i], tropas[i].quantidade)
+            saqueTotal += tropas[i].saque
+        } else if (coletasLiberadas === 2) {
+            tropas[i].totalPequena = tropas[i].quantidade * 0.714286
+            tropas[i].totalMedia = tropas[i].quantidade * 0.285714
+            coletaPequena(tropas[i], tropas[i].totalPequena)
+            coletaMedia(tropas[i], tropas[i].totalMedia)
+            saqueTotal += tropas[i].saque
+        } else if (coletasLiberadas === 3) {
+            tropas[i].totalPequena = tropas[i].quantidade * 0.625
+            tropas[i].totalMedia = tropas[i].quantidade * 0.25
+            tropas[i].totalGrande = tropas[i].quantidade * 0.125
+            coletaPequena(tropas[i], tropas[i].totalPequena)
+            coletaMedia(tropas[i], tropas[i].totalMedia)
+            coletaGrande(tropas[i], tropas[i].totalGrande)
+            saqueTotal += tropas[i].saque
+        } else if (coletasLiberadas === 4) {
+            tropas[i].totalPequena = tropas[i].quantidade * 0.576923
+            tropas[i].totalMedia = tropas[i].quantidade * 0.230769
+            tropas[i].totalGrande = tropas[i].quantidade * 0.115385
+            tropas[i].totalExtrema = tropas[i].quantidade * 0.076923
+            coletaPequena(tropas[i], tropas[i].totalPequena)
+            coletaMedia(tropas[i],tropas[i].totalMedia)
+            coletaGrande(tropas[i], tropas[i].totalGrande)
+            coletaExtrema(tropas[i], tropas[i].totalExtrema)
+            saqueTotal += tropas[i].saque
+        }
+    }
+}
+
+function reniciaTabela() {
+    for (a=0; a < arrayTabelas.length; a++) {
+        let linhas = document.getElementById(`${arrayTabelas[a]}`)
+
+        for (i=0; i < linhas.rows.length; i++) {
+            if (linhas.rows[2] != null) {
+                linhas.deleteRow(2)
+            }
+        }
+        for (i=0; i < linhas.rows.length; i++) {
+            if (linhas.rows[2] != null) {
+                linhas.deleteRow(2)
+            }
+        }
+    }
+}
+
+function insereTropasHTML() {
 
     for (i = 0; i < tropas.length;  i++) {
         if (tropas[i].quantidade > 0) {
@@ -87,43 +192,7 @@ function inserirTropaNaTabela () {
     }
 }
 
-function reniciaTabela() {
-   
-    for (a=0; a < arrayTabelas.length; a++) {
-        let linhas = document.getElementById(`${arrayTabelas[a]}`)
-
-        for (i=0; i < linhas.rows.length; i++) {
-            if (linhas.rows[2] != null) {
-                linhas.deleteRow(2)
-            }
-        }
-        for (i=0; i < linhas.rows.length; i++) {
-            if (linhas.rows[2] != null) {
-                linhas.deleteRow(2)
-            }
-        }
-    }
-}
-
-btn.addEventListener('click', (e) => {
-    e.preventDefault()
-    
-    for (i = 0; i < tropas.length; i++) {
-        tropas[i].quantidade = parseInt(document.getElementById(`quantidadeDe${tropas[i].nome}`).value)
-    }
-    
-    reniciaTabela()
-    executa()
-    inserirTropaNaTabela()
-})
-
-function executa() {
-    saqueTotal = 0
-    iniciaColeta()
-    imprimeResultadoHTML()
-}
-
-function imprimeResultadoHTML() {
+function insereRecursosHTML() {
     for (a=0; a < arrayTabelas.length; a++) {
         for (i = 0; i < 6; i += 2) {
             resultadoRecursos[i] =  document.querySelector(`#${arrayTabelas[a]} > tbody:nth-child(3) > tr > td:nth-child(${i + 2}) > p`)
@@ -142,72 +211,26 @@ function imprimeResultadoHTML() {
     }
 }
 
-function criaUnidade(nome, capacidade) {
-    this.nome = nome
-    this.capacidade = capacidade
-    this.quantidade = 0
-    this.saque = 0
-    this.totalPequena = 0
-    this.totalMedia = 0
-    this.totalGrande = 0
-    this.totalExtrema = 0
-}
+function cssTabela() {
+    const htmlMedia = document.getElementById("tabela-media")
+    const htmlGrande = document.getElementById("tabela-grande")
+    const htmlExtrema = document.getElementById("tabela-extrema")
 
-/* ------------------------------------------------ */
-/* --------------- Tipos de coletas --------------- */
-
-function coletaPequena(tropa, q) {
-    tropa.saque = tropa.capacidade * q
-    return Math.round(tropa.saque)
-}
-
-function coletaMedia(tropa, q) {
-    tropa.saque = tropa.capacidade * 2.5 * q
-    return Math.round(tropa.saque)
-}
-
-function coletaGrande(tropa, q) {
-    tropa.saque = tropa.capacidade * 5 * q
-    return Math.round(tropa.saque)}
-
-function coletaExtrema(tropa, q) {
-    tropa.saque = tropa.capacidade * 7.5 * q
-    return Math.round(tropa.saque)}
-
-/* ------------------------------------------------ */
-/* --------------- Divisor de tropas -------------- */
-
-function iniciaColeta () {
-
-    for (i=0; i < tropas.length; i++) {
-        if (coletasLiberadas === 1) {
-            tropas[i].totalPequena = tropas[i].quantidade
-            coletaPequena(tropas[i], tropas[i].quantidade)
-            saqueTotal += tropas[i].saque
-        } else if (coletasLiberadas === 2) {
-            tropas[i].totalPequena = tropas[i].quantidade * 0.714286
-            tropas[i].totalMedia = tropas[i].quantidade * 0.285714
-            coletaPequena(tropas[i], tropas[i].totalPequena)
-            coletaMedia(tropas[i], tropas[i].totalMedia)
-            saqueTotal += tropas[i].saque
-        } else if (coletasLiberadas === 3) {
-            tropas[i].totalPequena = tropas[i].quantidade * 0.625
-            tropas[i].totalMedia = tropas[i].quantidade * 0.25
-            tropas[i].totalGrande = tropas[i].quantidade * 0.125
-            coletaPequena(tropas[i], tropas[i].totalPequena)
-            coletaMedia(tropas[i], tropas[i].totalMedia)
-            coletaGrande(tropas[i], tropas[i].totalGrande)
-            saqueTotal += tropas[i].saque
-        } else if (coletasLiberadas === 4) {
-            tropas[i].totalPequena = tropas[i].quantidade * 0.576923
-            tropas[i].totalMedia = tropas[i].quantidade * 0.230769
-            tropas[i].totalGrande = tropas[i].quantidade * 0.115385
-            tropas[i].totalExtrema = tropas[i].quantidade * 0.076923
-            coletaPequena(tropas[i], tropas[i].totalPequena)
-            coletaMedia(tropas[i],tropas[i].totalMedia)
-            coletaGrande(tropas[i], tropas[i].totalGrande)
-            coletaExtrema(tropas[i], tropas[i].totalExtrema)
-            saqueTotal += tropas[i].saque
-        }
+    if (coletasLiberadas === 1) {
+        htmlMedia.style.cssText = "filter: blur(4px) grayscale(1)";
+        htmlGrande.style.cssText = "filter: blur(4px) grayscale(1)";
+        htmlExtrema.style.cssText = "filter: blur(4px) grayscale(1)";
+    } else if (coletasLiberadas === 2) {
+        htmlMedia.style.removeProperty("filter");
+        htmlGrande.style.cssText = "filter: blur(4px) grayscale(1)";
+        htmlExtrema.style.cssText = "filter: blur(4px) grayscale(1)";;
+    } else if (coletasLiberadas === 3) {
+        htmlMedia.style.removeProperty("filter");
+        htmlGrande.style.removeProperty("filter");
+        htmlExtrema.style.cssText = "filter: blur(4px) grayscale(1)";
+    } else {
+        htmlMedia.style.removeProperty("filter");
+        htmlGrande.style.removeProperty("filter");
+        htmlExtrema.style.removeProperty("filter");
     }
 }
